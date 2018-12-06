@@ -1,1 +1,46 @@
 
+import torch
+import pandas as pd #2015_randomisiert_mod 
+import torch.nn as nn #Für init
+import torch.nn.functional as F #Für forward 
+import pandas as pd
+from torch.autograd import Variable #import Tensor als Variable
+
+#CSV Datei einlesen und ausgeben mit pandas
+Terragon_Sample_Data = pd.read_csv("2015_randomisiert_mod.csv", sep=";",skiprows=0)
+print(Terragon_Sample_Data)
+print(type(Terragon_Sample_Data))
+
+#Values aus dem Pandas DataFrame in einen PyTorch Tensor umwandeln
+Terragon = torch.tensor(Terragon_Sample_Data.values)
+print(Terragon)
+print(Terragon.shape)
+
+
+class MeinNetz(nn.Module):
+
+        def __init__(self):
+            super(MeinNetz, self).__init__() 
+            self.lin1 = nn.Linear(3,3)    #linearer Layer1: 3_Input-->3_Output
+            self.lin2 = nn.Linear(3,1)    ##Layer2: 3_Input-->1_Output
+    
+        def forward(self, x):
+            x = F.relu(self.lin1(x)) #Aktivierungsfkt erster layer
+            x = self.lin2(x) #Unser Output 
+            return x
+    
+        def num_flat_features(self,x):
+            size = x.size()[1:] # durch [1:] wird erste zeile gekickt(zb. Mengeneinehiten)
+            num = 1
+            for i in size:
+                num*=i
+            return num
+        
+        
+netz=MeinNetz()
+#print(netz) 
+
+input = torch.autograd.Variable(Terragon).float() #muss als float umgewandelt werden
+#print (input)
+out = netz(input)
+print(out) #kommt erstmal nur Müll raus, da Lernfunktion noch nicht implementiert wurde
