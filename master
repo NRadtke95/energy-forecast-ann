@@ -42,5 +42,11 @@ netz=MeinNetz()
 
 input = torch.autograd.Variable(Terragon).float() #muss als float umgewandelt werden
 #print (input)
-out = netz(input)
-print(out) #kommt erstmal nur Müll raus, da Lernfunktion noch nicht implementiert wurde
+out = netz(input) 
+print(out) #kommt erstmal nur Müll raus, da Lernfunktion noch nicht implementiert wurde und noch nicht unser finaler Input eingespeist wurde
+
+#Was ist noch Offen?
+#1) die richtigen Input Daten in entprechende Sets einteilen
+#2) die Input-Dimension anpassen, evtl andere Layer verwenden z.B. Sigmoid bzw. andere Layer-Anzahl
+#3) das Netz lernen lassen, also den Input durchs Netz jagen und einen Abgleich mit dem target (normierte Last) vornehmen
+  
