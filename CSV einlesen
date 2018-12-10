@@ -1,0 +1,12 @@
+import torch
+import pandas as pd 
+
+#CSV Datei einlesen, seperiert nach input und dem target
+df_in = pd.read_csv("data_final_v05.csv", sep=";",skiprows=0, usecols=[3,4,5,6,7,8])
+df_target = pd.read_csv("data_final_v05.csv", sep=";",skiprows=0, usecols=[9])
+
+#den dataframe in einen tensor wandeln und ausgeben
+inputdata = torch.tensor(df_in.values)
+targetdata = torch.tensor(df_target.values)
+print(inputdata)
+print(targetdata)
